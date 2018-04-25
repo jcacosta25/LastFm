@@ -9,7 +9,7 @@ import com.example.kon3050.lastfm.ui.model.ListTopArtistUiModel
 import javax.inject.Inject
 
 class TopArtistViewModel @Inject constructor(
-        private val useCaseGetTopArtist: UseCaseGetTopArtist,
+        useCaseGetTopArtist: UseCaseGetTopArtist,
         private val uiMapper: UiMapper) : ViewModel() {
 
     private var topArtist: LiveData<ListTopArtistUiModel>

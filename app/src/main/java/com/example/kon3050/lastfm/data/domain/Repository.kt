@@ -10,7 +10,13 @@ interface Repository {
 
     fun selectTopArtist() : LiveData<ListTopArtistModel>
 
-    fun fetchArtist(artistName: String, artistId: String) : LiveData<ArtistModel>
-
     fun insertTopArtist(listTopArtistModel: ListTopArtistModel) : List<Long>
+
+
+    fun fetchArtist(artistName: String) : LiveData<ArtistModel>
+
+    fun selectArtist(artistName:String):LiveData<ArtistModel>
+
+    fun insertArtist(artist:ArtistModel):Long
+
 }

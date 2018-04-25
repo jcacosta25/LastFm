@@ -21,8 +21,8 @@ class DiskDataSourceImpl @Inject constructor(private val database: AppDataBase) 
         return database.topArtistDao().selectArtistById(artistId)
     }
 
-    override fun selectArtist(artistId: String): LiveData<ArtistEntity> {
-        return database.artistDao().selectArtist(artistId)
+    override fun selectArtist(artistName: String): LiveData<ArtistEntity> {
+        return database.artistDao().selectArtist(artistName)
     }
 
     override fun selectAllArtist(): LiveData<List<ArtistEntity>> {

@@ -20,32 +20,26 @@ import com.example.kon3050.lastfm.ui.navigation.OnBackPressListener
 import com.example.kon3050.lastfm.ui.views.TopArtistView
 import javax.inject.Inject
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class TopArtistFragment : BaseFragment(),TopArtistView,OnBackPressListener {
+class TopArtistFragment : BaseFragment(), TopArtistView, OnBackPressListener {
 
-    lateinit var viewModel: TopArtistViewModel
-    lateinit var binding: FragmentTopArtistBinding
+    private lateinit var viewModel: TopArtistViewModel
+    private lateinit var binding: FragmentTopArtistBinding
     private var adapter: TopArtistAdapter? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val adapterListener = TopArtistAdapterListener<TopArtistUiModel> {
-        _,_,(artist) -> navigator.navigateToDetailActivity(artist)
+    private val adapterListener = object : TopArtistAdapterListener<TopArtistUiModel> {
+        override fun onItemClick(view: View, position: Int, item: TopArtistUiModel) {
+            navigator.navigateToDetailScreen(item.artistName)
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate<FragmentTopArtistBinding>(inflater,R.layout.fragment_top_artist,container,false)
+        binding = DataBindingUtil.inflate<FragmentTopArtistBinding>(inflater, R.layout.fragment_top_artist, container, false)
         return binding.root
     }
 
@@ -55,7 +49,7 @@ class TopArtistFragment : BaseFragment(),TopArtistView,OnBackPressListener {
         userComponent.inject(this)
 
         binding.rvTopSongs.layoutManager = LinearLayoutManager(activity)
-        viewModel = ViewModelProviders.of(this,viewModelFactory).get(TopArtistViewModel::class.java)
+        viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopArtistViewModel::class.java)
 
         viewModel.loadTopArtist().observe(this, Observer { response ->
             adapter = TopArtistAdapter(response?.artists!!.toList())
@@ -84,12 +78,12 @@ class TopArtistFragment : BaseFragment(),TopArtistView,OnBackPressListener {
     }
 
     override fun onBackPressed() {
-       activity?.finish()
+        activity?.finish()
     }
 
     companion object {
         @JvmStatic
-        fun newInstance() : Fragment{
+        fun newInstance(): Fragment {
             return TopArtistFragment()
         }
     }

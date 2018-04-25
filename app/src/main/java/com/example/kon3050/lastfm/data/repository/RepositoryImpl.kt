@@ -5,9 +5,9 @@ import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.Transformations
 import com.example.kon3050.lastfm.AppExecutors
 import com.example.kon3050.lastfm.data.domain.Repository
-import com.example.kon3050.lastfm.data.mapper.ArtistMapper
 import com.example.kon3050.lastfm.data.domain.model.ArtistModel
 import com.example.kon3050.lastfm.data.domain.model.ListTopArtistModel
+import com.example.kon3050.lastfm.data.mapper.ArtistMapper
 import com.example.kon3050.lastfm.data.repository.datasource.CloudDataSource
 import com.example.kon3050.lastfm.data.repository.datasource.DiskDataSource
 import com.example.kon3050.lastfm.ui.utils.DeviceUtils
@@ -59,9 +59,9 @@ class RepositoryImpl @Inject constructor(
         })
     }
 
-    override fun fetchArtist(artistName: String, artistId: String): LiveData<ArtistModel> {
+    /*override fun fetchArtist(artistName: String): LiveData<ArtistModel> {
         val mediatorResponse = MediatorLiveData<ArtistModel>()
-        val entityLiveData = diskDataSource.selectArtist(artistId)
+        val entityLiveData = diskDataSource.selectArtist(artistName)
 
         mediatorResponse.addSource(entityLiveData, { artistEntity ->
             if (artistEntity != null) {
@@ -94,7 +94,50 @@ class RepositoryImpl @Inject constructor(
             }
         })
         return mediatorResponse
+    }*/
+
+    override fun fetchArtist(artistName: String): LiveData<ArtistModel> {
+        val responseMediatorLiveData = MediatorLiveData<ArtistModel>()
+
+        if(deviceUtils.isNetworkAvailable) {
+            responseMediatorLiveData.addSource(cloudDataSource.getArtistInfo(artistName), { apiResponse ->
+                if(apiResponse != null && apiResponse.isSuccessful && apiResponse.body != null) {
+                    val model = apiResponse.body.artist
+                    responseMediatorLiveData.postValue(artistMapper.convert(model))
+                } else {
+                    val errorResponse = ArtistModel()
+                    errorResponse.setError("$artistName was not found")
+                    responseMediatorLiveData.postValue(errorResponse)
+                }
+            })
+        } else {
+            val entityResponse = diskDataSource.selectArtist(artistName)
+            if(entityResponse.value!!.artistId.isNullOrEmpty()) {
+                val errorResponse = ArtistModel()
+                errorResponse.setError("$artistName was not found")
+                responseMediatorLiveData.postValue(errorResponse)
+            } else {
+                responseMediatorLiveData.addSource(entityResponse,{model ->
+                    model
+                })
+            }
+        }
+
+        return responseMediatorLiveData
     }
 
+    override fun insertArtist(artist: ArtistModel): Long {
+        return diskDataSource.insertArtist(artistMapper.convert(artist))
+    }
 
+    override fun selectArtist(artistName: String): LiveData<ArtistModel> {
+        return Transformations.map(diskDataSource.selectArtist(artistName), { entity ->
+            if(entity == null){
+                ArtistModel()
+            } else {
+                artistMapper.convert(entity)
+            }
+
+        })
+    }
 }

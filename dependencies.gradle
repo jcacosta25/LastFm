@@ -57,8 +57,9 @@ ext {
             DaggerAndroid        : buildDependency(dagger_package,"dagger-android",dagger_version),
             DaggerAndroidSupport : buildDependency(dagger_package,"dagger-android-support",dagger_version),
             DaggerAndroidProcessor : buildDependency(dagger_package,"dagger-android-processor",dagger_version),
-            ArchExtensions         : buildDependency("android.arch.lifecycle","extensions",arch_version),
+            ArchExtensions         : buildDependency(arch_package,"extensions",arch_version),
             AndroidDataBinding     : buildDependency('com.android.databinding','compiler',databinding_version),
+            ArchCommon             : buildDependency(arch_package,'common-java8',arch_version),
             Gson                   : buildDependency('com.google.code.gson','gson','2.8.1')
 
     ]
