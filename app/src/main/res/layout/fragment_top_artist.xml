@@ -9,10 +9,13 @@
         tools:context=".ui.home.TopArtistFragment">
 
         <android.support.v7.widget.RecyclerView
+            android:clipToPadding="false"
             android:id="@+id/rv_top_songs"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:listitem="@layout/item_top_artist" />
+            android:padding="16dp"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            tools:listitem="@layout/item_artist" />
 
     </FrameLayout>
 </layout>

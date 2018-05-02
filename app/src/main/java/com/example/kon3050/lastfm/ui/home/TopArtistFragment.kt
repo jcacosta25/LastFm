@@ -8,7 +8,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +17,7 @@ import com.example.kon3050.lastfm.databinding.FragmentTopArtistBinding
 import com.example.kon3050.lastfm.ui.base.BaseFragment
 import com.example.kon3050.lastfm.ui.model.TopArtistUiModel
 import com.example.kon3050.lastfm.ui.navigation.OnBackPressListener
+import com.example.kon3050.lastfm.ui.utils.ItemOffsetDecoration
 import com.example.kon3050.lastfm.ui.views.TopArtistView
 import javax.inject.Inject
 
@@ -32,7 +33,7 @@ class TopArtistFragment : BaseFragment(), TopArtistView, OnBackPressListener {
 
     private val adapterListener = object : TopArtistAdapterListener<TopArtistUiModel> {
         override fun onItemClick(view: View, position: Int, item: TopArtistUiModel) {
-            navigator.navigateToDetailScreen(item.artistName)
+            navigator.navigateToDetailActivity(item.artistName)
         }
     }
 
@@ -47,8 +48,17 @@ class TopArtistFragment : BaseFragment(), TopArtistView, OnBackPressListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         userComponent.inject(this)
+        val spanCount = 2 // 3 columns
+        val spacing = 50 // 50px
+        val includeEdge = true
 
-        binding.rvTopSongs.layoutManager = LinearLayoutManager(activity)
+        val layoutManager = GridLayoutManager(activity,2)
+        val itemDecoration = ItemOffsetDecoration(activity!!,R.dimen.item_spacing_offset)
+        //binding.rvTopSongs.layoutManager = LinearLayoutManager(activity)
+        binding.rvTopSongs.layoutManager = layoutManager
+        //binding.rvTopSongs.addItemDecoration(ItemOffsetDecoration(activity!!,R.integer.offset_grid))
+        //binding.rvTopSongs.addItemDecoration(GridSpacingItemDecoration(2,resources.getDimensionPixelSize(R.dimen.recycler_view_item_width)))
+        binding.rvTopSongs.addItemDecoration(itemDecoration)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopArtistViewModel::class.java)
 
         viewModel.loadTopArtist().observe(this, Observer { response ->

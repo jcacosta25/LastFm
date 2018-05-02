@@ -25,7 +25,7 @@ constructor(private val mNavigatorManager: NavigatorManager, private val mContex
     override fun navigateToDetailActivity(artistName: String) {
         val intent = Intent(mContext, DetailActivity::class.java)
         intent.putExtra(BUNDLE_ARTIST_NAME, artistName)
-        //intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         mContext.startActivity(intent)
     }
 

@@ -16,7 +16,7 @@ ext {
     retrofit_version = '2.2.0'
     okhttp_version = '3.7.0'
     dagger_version = '2.12'
-    databinding_version = '3.1.1'
+    databinding_version = '3.1.2'
     expressocore_version = '2.2.2'
     playservices_version =  '11.0.4'
     multidex_version = '1.0.1'

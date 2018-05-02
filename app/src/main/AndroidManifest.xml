@@ -25,6 +25,10 @@
         <activity
             android:parentActivityName=".ui.home.MainActivity"
             android:name=".ui.detail.DetailActivity"/>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

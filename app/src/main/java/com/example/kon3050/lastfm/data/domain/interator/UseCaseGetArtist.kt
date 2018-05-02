@@ -9,7 +9,7 @@ import com.example.kon3050.lastfm.data.domain.model.ArtistModel
 import javax.inject.Inject
 
 class UseCaseGetArtist @Inject constructor(
-        private val appExecutors: AppExecutors,
+        appExecutors: AppExecutors,
         private val repository: Repository
 ) : NetworkBoundResource<ArtistModel, ArtistModel>(appExecutors) {
 

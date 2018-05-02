@@ -30,6 +30,11 @@ android {
         }
     }
 
+    kapt {
+        generateStubs = true
+        mapDiagnosticLocations = true
+    }
+
     dataBinding {
         enabled = true
     }

@@ -15,4 +15,8 @@ class DetailActivity :BaseActivity() {
         DataBindingUtil.setContentView<ActivityDetailBinding>(this,R.layout.activity_detail)
         navigator.navigateToDetailScreen(intent.getStringExtra(BUNDLE_ARTIST_NAME))
     }
+
+    override fun onBackPressed() {
+        finish()
+    }
 }
