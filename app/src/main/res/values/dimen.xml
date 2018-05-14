@@ -2,4 +2,7 @@
 <resources>
     <dimen name="item_spacing_offset">4dp</dimen>
     <dimen name="recycler_view_item_width">180dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="card_side_space">16dp</dimen>
+    <dimen name="card_top_space">8dp</dimen>
 </resources>
