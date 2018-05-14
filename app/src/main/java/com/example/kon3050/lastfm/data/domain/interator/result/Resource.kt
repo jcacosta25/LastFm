@@ -28,7 +28,7 @@ class Resource<T>(val status: Status, val data: T, val message: String) {
 
     override fun hashCode(): Int {
         var result = status.hashCode()
-        result = 31 * result + (message?.hashCode() ?: 0)
+        result = 31 * result + message.hashCode()
         result = 31 * result + (data?.hashCode() ?: 0)
         return result
     }

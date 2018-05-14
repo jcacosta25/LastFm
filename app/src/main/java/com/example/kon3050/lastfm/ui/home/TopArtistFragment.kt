@@ -48,16 +48,10 @@ class TopArtistFragment : BaseFragment(), TopArtistView, OnBackPressListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         userComponent.inject(this)
-        val spanCount = 2 // 3 columns
-        val spacing = 50 // 50px
-        val includeEdge = true
 
         val layoutManager = GridLayoutManager(activity,2)
         val itemDecoration = ItemOffsetDecoration(activity!!,R.dimen.item_spacing_offset)
-        //binding.rvTopSongs.layoutManager = LinearLayoutManager(activity)
         binding.rvTopSongs.layoutManager = layoutManager
-        //binding.rvTopSongs.addItemDecoration(ItemOffsetDecoration(activity!!,R.integer.offset_grid))
-        //binding.rvTopSongs.addItemDecoration(GridSpacingItemDecoration(2,resources.getDimensionPixelSize(R.dimen.recycler_view_item_width)))
         binding.rvTopSongs.addItemDecoration(itemDecoration)
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopArtistViewModel::class.java)
 

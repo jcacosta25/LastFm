@@ -7,7 +7,7 @@ import com.example.kon3050.lastfm.data.api.model.TopArtistWrapperResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-public interface LastFmApi {
+interface LastFmApi {
 
     @GET("?method=geo.gettopartists&format=json")
     fun getTopArtist(@Query("country") country: String): LiveData<ApiResponse<TopArtistWrapperResponse>>

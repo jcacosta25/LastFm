@@ -1,25 +1,21 @@
 package com.example.kon3050.lastfm.ui.utils
 
-import android.Manifest;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.Build;
-import android.os.Environment;
-import android.provider.Settings;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.LocationManager
+import android.net.ConnectivityManager
+import android.os.Build
+import android.os.Environment
+import android.provider.Settings
+import android.support.v4.content.ContextCompat
+import android.util.Log
 import com.example.kon3050.lastfm.data.db.DATABASE_NAME
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-
-import javax.inject.Inject;
+import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import javax.inject.Inject
 
 
 class DeviceUtils @Inject
@@ -34,11 +30,8 @@ constructor(private val mContext: Context) {
     val isNetworkAvailable: Boolean
         get() {
             val conMgr = mContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            if (conMgr != null) {
-                val networkInfo = conMgr.activeNetworkInfo
-                return networkInfo != null
-            }
-            return false
+            val networkInfo = conMgr.activeNetworkInfo
+            return networkInfo != null
         }
 
     /**
@@ -51,13 +44,13 @@ constructor(private val mContext: Context) {
         get() {
             if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 val locationManager = mContext.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-                return locationManager != null && locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                return  locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
             }
 
             val locationMode: Int
             try {
                 locationMode = Settings.Secure.getInt(
-                        mContext.getContentResolver(),
+                        mContext.contentResolver,
                         Settings.Secure.LOCATION_MODE)
             } catch (e: Settings.SettingNotFoundException) {
                 e.printStackTrace()
@@ -92,9 +85,9 @@ constructor(private val mContext: Context) {
     private fun writeToSD(context: Context, databaseName: String) {
         val DB_PATH: String
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            DB_PATH = context.getFilesDir().getAbsolutePath().replace("files", "databases") + File.separator
+            DB_PATH = context.filesDir.absolutePath.replace("files", "databases") + File.separator
         } else {
-            DB_PATH = context.getFilesDir().getPath() + context.getPackageName() + "/databases/"
+            DB_PATH = context.filesDir.path + context.packageName + "/databases/"
         }
         val sd = Environment.getExternalStorageDirectory()
 
@@ -104,18 +97,17 @@ constructor(private val mContext: Context) {
             val backupDB = File(sd, backupDBPath)
 
             if (currentDB.exists()) {
-                val src = FileInputStream(currentDB).getChannel()
-                val dst = FileOutputStream(backupDB).getChannel()
+                val src = FileInputStream(currentDB).channel
+                val dst = FileOutputStream(backupDB).channel
                 dst.transferFrom(src, 0, src.size())
                 src.close()
                 dst.close()
-                Log.d("JLRF", "exported-path:" + backupDB.getPath())
+                Log.d("JLRF", "exported-path:" + backupDB.path)
             }
         }
     }
 
     companion object {
-
         private val LOG_TAG = DeviceUtils::class.java.name
     }
 
