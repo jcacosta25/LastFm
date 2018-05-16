@@ -11,7 +11,7 @@ ext {
     support_version = '27.1.1'
     junit_version = '4.12'
     constraint_version = '1.0.2'
-    room_version = '1.0.0'
+    room_version = '1.1.0'
     arch_version = '1.1.1'
     retrofit_version = '2.2.0'
     okhttp_version = '3.7.0'
@@ -22,6 +22,7 @@ ext {
     multidex_version = '1.0.1'
     picasso_version = '2.71828'
     mockito_version = '2.17.0'
+    navigation_version = '1.0.0-alpha01'
 
 
     mockito_package = 'org.mockito'
@@ -34,34 +35,36 @@ ext {
     support_package = 'com.android.support'
     constraint_package = 'com.android.support.constraint'
     kotlin_package = 'org.jetbrains.kotlin'
+    navigation_package = 'android.arch.navigation'
 
 
     dependencies = [
-            ConstraintLayout     : buildDependency(constraint_package,'constraint-layout',constraint_version),
-            MultiDex             : buildDependency(support_package,'multidex',multidex_version),
+            ConstraintLayout       : buildDependency(constraint_package,'constraint-layout',constraint_version),
+            MultiDex               : buildDependency(support_package,'multidex',multidex_version),
             CardView               : buildDependency(support_package,'cardview-v7',support_version),
             CustomTabs             : buildDependency(support_package,'customtabs',support_version),
-            SupportV4            : buildDependency(support_package,'support-v4',support_version),
-            AppCompatV7          : buildDependency(support_package,'appcompat-v7',support_version),
-            SupportDesign        : buildDependency(support_package,'design',support_version),
-            Retrofit             : buildDependency(retrofit_package,'retrofit',retrofit_version),
+            SupportV4              : buildDependency(support_package,'support-v4',support_version),
+            AppCompatV7            : buildDependency(support_package,'appcompat-v7',support_version),
+            SupportDesign          : buildDependency(support_package,'design',support_version),
+            Retrofit               : buildDependency(retrofit_package,'retrofit',retrofit_version),
             RetrofitGson           : buildDependency(retrofit_package,'converter-gson',retrofit_version),
-            OkHttp               : buildDependency(okhttp_package,'okhttp',okhttp_version),
-            OkHttpInterceptor    : buildDependency(okhttp_package,'logging-interceptor',okhttp_version),
-            Picasso              : buildDependency(picasso_package,'picasso',picasso_version),
-            RoomCompiler         : buildDependency(room_package,'compiler',room_version),
-            ArchRoomRunTime      : buildDependency(room_package,'runtime',room_version),
-            KotlinLib            : buildDependency(kotlin_package,'kotlin-stdlib-jre7',kotlin_version),
-            Dagger               : buildDependency(dagger_package,'dagger',dagger_version),
-            DaggerCompiler       : buildDependency(dagger_package,"dagger-compiler",dagger_version),
-            DaggerAndroid        : buildDependency(dagger_package,"dagger-android",dagger_version),
-            DaggerAndroidSupport : buildDependency(dagger_package,"dagger-android-support",dagger_version),
+            OkHttp                 : buildDependency(okhttp_package,'okhttp',okhttp_version),
+            OkHttpInterceptor      : buildDependency(okhttp_package,'logging-interceptor',okhttp_version),
+            Picasso                : buildDependency(picasso_package,'picasso',picasso_version),
+            RoomCompiler           : buildDependency(room_package,'compiler',room_version),
+            ArchRoomRunTime        : buildDependency(room_package,'runtime',room_version),
+            KotlinLib              : buildDependency(kotlin_package,'kotlin-stdlib-jdk7',kotlin_version),
+            Dagger                 : buildDependency(dagger_package,'dagger',dagger_version),
+            DaggerCompiler         : buildDependency(dagger_package,"dagger-compiler",dagger_version),
+            DaggerAndroid          : buildDependency(dagger_package,"dagger-android",dagger_version),
+            DaggerAndroidSupport   : buildDependency(dagger_package,"dagger-android-support",dagger_version),
             DaggerAndroidProcessor : buildDependency(dagger_package,"dagger-android-processor",dagger_version),
             ArchExtensions         : buildDependency(arch_package,"extensions",arch_version),
             AndroidDataBinding     : buildDependency('com.android.databinding','compiler',databinding_version),
             ArchCommon             : buildDependency(arch_package,'common-java8',arch_version),
-            Gson                   : buildDependency('com.google.code.gson','gson','2.8.1')
-
+            Gson                   : buildDependency('com.google.code.gson','gson','2.8.1'),
+            NavigationFragment     : buildDependency(navigation_package,'navigation-fragment',navigation_version),
+            NavigationUi           : buildDependency(navigation_package,'navigation-ui',navigation_version)
     ]
 
     testDependencies = [

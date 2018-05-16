@@ -51,7 +51,6 @@ internal constructor(private val appExecutors: AppExecutors) {
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             result.removeSource(dbSource)
-
             if (response != null && !response.error) {
                 appExecutors.diskIO.execute {
                     saveCallResult(processResponse(response))

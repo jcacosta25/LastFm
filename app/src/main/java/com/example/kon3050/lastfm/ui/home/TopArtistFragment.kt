@@ -17,7 +17,7 @@ import com.example.kon3050.lastfm.databinding.FragmentTopArtistBinding
 import com.example.kon3050.lastfm.ui.base.BaseFragment
 import com.example.kon3050.lastfm.ui.model.TopArtistUiModel
 import com.example.kon3050.lastfm.ui.navigation.OnBackPressListener
-import com.example.kon3050.lastfm.ui.utils.ItemOffsetDecoration
+import com.example.kon3050.lastfm.ui.utils.MarginDecoration
 import com.example.kon3050.lastfm.ui.views.TopArtistView
 import javax.inject.Inject
 
@@ -50,21 +50,23 @@ class TopArtistFragment : BaseFragment(), TopArtistView, OnBackPressListener {
         userComponent.inject(this)
 
         val layoutManager = GridLayoutManager(activity,2)
-        val itemDecoration = ItemOffsetDecoration(activity!!,R.dimen.item_spacing_offset)
-        binding.rvTopSongs.layoutManager = layoutManager
-        binding.rvTopSongs.addItemDecoration(itemDecoration)
+        val itemDecoration = MarginDecoration(activity!!)
+        binding.rvTopArtist.addItemDecoration(itemDecoration)
+        binding.rvTopArtist.setHasFixedSize(true)
+        binding.rvTopArtist.layoutManager = layoutManager
+
         viewModel = ViewModelProviders.of(this, viewModelFactory).get(TopArtistViewModel::class.java)
 
         viewModel.loadTopArtist().observe(this, Observer { response ->
             adapter = TopArtistAdapter(response?.artists!!.toList())
-            binding.rvTopSongs.adapter = adapter
+            binding.rvTopArtist.adapter = adapter
             adapter!!.setTopArtistAdapterListener(adapterListener)
         })
     }
 
     override fun onSuccessArtistsLoaded(artistModel: List<TopArtistUiModel>) {
         adapter = TopArtistAdapter(artistModel)
-        binding.rvTopSongs.adapter = adapter
+        binding.rvTopArtist.adapter = adapter
         adapter!!.setTopArtistAdapterListener(adapterListener)
     }
 

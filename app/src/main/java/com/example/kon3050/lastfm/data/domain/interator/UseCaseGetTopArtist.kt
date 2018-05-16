@@ -24,9 +24,7 @@ class UseCaseGetTopArtist @Inject constructor(
         repository.insertTopArtist(item)
     }
 
-    override fun shouldFetch(data: ListTopArtistModel?): Boolean {
-        return data == null || data.artists.isEmpty()
-    }
+    override fun shouldFetch(data: ListTopArtistModel?): Boolean = true
 
     override fun loadFromDb(): LiveData<ListTopArtistModel> {
         return repository.selectTopArtist()

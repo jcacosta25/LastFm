@@ -27,9 +27,7 @@ class UseCaseGetArtist @Inject constructor(
         repository.insertArtist(item)
     }
 
-    override fun shouldFetch(data: ArtistModel?): Boolean {
-        return data == null ||
-    }
+    override fun shouldFetch(data: ArtistModel?): Boolean = true
 
     override fun loadFromDb(): LiveData<ArtistModel> {
         return repository.selectArtist(artistName)

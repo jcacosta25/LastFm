@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/topArtistFragment">
+
+    <fragment
+        android:id="@+id/topArtistFragment"
+        android:name="com.example.kon3050.lastfm.ui.home.TopArtistFragment"
+        android:label="TopArtistFragment" />
+
+</navigation>

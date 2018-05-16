@@ -30,11 +30,6 @@ android {
         }
     }
 
-    kapt {
-        generateStubs = true
-        mapDiagnosticLocations = true
-    }
-
     dataBinding {
         enabled = true
     }
@@ -70,12 +65,15 @@ dependencies {
     implementation dependencies.DaggerAndroidSupport
     implementation dependencies.Gson
     implementation dependencies.ArchRoomRunTime
+    implementation dependencies.NavigationFragment
+    implementation dependencies.NavigationUi
 
 
     kapt dependencies.RoomCompiler
+    implementation dependencies.RoomCompiler
     kapt dependencies.DaggerCompiler
     kapt dependencies.DaggerAndroidProcessor
-    kapt dependencies.AndroidDataBinding
+    implementation dependencies.AndroidDataBinding
 
     testImplementation testDependencies.JUnit
     testImplementation testDependencies.Mockito
