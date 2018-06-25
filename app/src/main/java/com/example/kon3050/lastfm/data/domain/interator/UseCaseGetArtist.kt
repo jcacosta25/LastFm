@@ -28,7 +28,7 @@ class UseCaseGetArtist @Inject constructor(
     }
 
     override fun shouldFetch(data: ArtistModel?): Boolean {
-        return data == null || data.artistId.isNullOrEmpty()
+        return data == null ||
     }
 
     override fun loadFromDb(): LiveData<ArtistModel> {
