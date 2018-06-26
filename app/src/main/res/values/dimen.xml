@@ -7,4 +7,5 @@
     <dimen name="card_top_space">8dp</dimen>
     <dimen name="item_margin">8dp</dimen>
     <dimen name="item_margin_half">8dp</dimen>
+    <dimen name="image_height">200dp</dimen>
 </resources>
