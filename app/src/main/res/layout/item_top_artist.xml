@@ -16,6 +16,8 @@
             android:id="@+id/img_artist"
             android:layout_width="match_parent"
             android:layout_height="190dp"
+            tools:src="@drawable/artist_img"
+            android:scaleType="centerCrop"
             imageUrl="@{model.image}"/>
 
         <LinearLayout

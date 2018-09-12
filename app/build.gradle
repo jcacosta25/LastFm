@@ -42,8 +42,8 @@ android {
 }
 
 dependencies {
-    def dependencies = rootProject.ext.dependencies
-    def testDependencies = rootProject.ext.testDependencies
+    def dependencies = rootProject.ext.deps
+    def testDependencies = rootProject.ext.testDeps
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation dependencies.KotlinLib
@@ -70,13 +70,13 @@ dependencies {
 
 
     kapt dependencies.RoomCompiler
-    implementation dependencies.RoomCompiler
+    annotationProcessor dependencies.RoomCompiler
     kapt dependencies.DaggerCompiler
     kapt dependencies.DaggerAndroidProcessor
-    implementation dependencies.AndroidDataBinding
+    annotationProcessor dependencies.AndroidDataBinding
 
     testImplementation testDependencies.JUnit
     testImplementation testDependencies.Mockito
 
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation testDependencies.EspressoCore
 }
