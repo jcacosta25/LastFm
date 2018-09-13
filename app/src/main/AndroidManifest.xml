@@ -25,7 +25,7 @@
         <activity
             android:name=".ui.detail.DetailActivity"
             android:parentActivityName=".ui.home.MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme.Detail" />
 
         <meta-data
             android:name="preloaded_fonts"

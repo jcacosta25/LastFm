@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="artist"
             type="com.example.kon3050.lastfm.ui.model.ArtistUiModel" />
@@ -23,11 +24,11 @@
             <android.support.design.widget.CollapsingToolbarLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
                 android:fitsSystemWindows="true"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:contentScrim="?attr/colorPrimary"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
                 <ImageView
                     android:id="@+id/img_artist"
@@ -42,8 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:titleTextColor="@android:color/white"
-                    app:title="@{artist.artistName}" />
+                    app:title="@{artist.artistName}"
+                    app:titleTextColor="@android:color/white" />
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
@@ -58,6 +59,7 @@
                 android:id="@+id/txt_content"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="8dp"
                 android:text="@{artist.content}" />
         </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
