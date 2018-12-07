@@ -5,17 +5,17 @@ package com.example.kon3050.lastfm.data.domain.interator.result
  * A generic class that holds a value with its loading status.
  * @param <T>
 </T> */
-class Resource<T>(val status: Status, val data: T, val message: String) {
+class Resource<T>(private val status: Status, val data: T, val message: String?) {
 
-    override fun equals(o: Any?): Boolean {
-        if (this === o) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
             return true
         }
-        if (o == null || javaClass != o.javaClass) {
+        if (other == null || javaClass != other.javaClass) {
             return false
         }
 
-        val resource = o as Resource<*>?
+        val resource = other as Resource<*>?
 
         if (status !== resource!!.status) {
             return false
@@ -28,7 +28,7 @@ class Resource<T>(val status: Status, val data: T, val message: String) {
 
     override fun hashCode(): Int {
         var result = status.hashCode()
-        result = 31 * result + message.hashCode()
+        result = 31 * result + message!!.hashCode()
         result = 31 * result + (data?.hashCode() ?: 0)
         return result
     }

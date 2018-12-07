@@ -57,11 +57,10 @@ constructor(private val mContext: Context) {
                 return false
             }
 
-            when (locationMode) {
-
-                Settings.Secure.LOCATION_MODE_HIGH_ACCURACY, Settings.Secure.LOCATION_MODE_SENSORS_ONLY -> return true
-                Settings.Secure.LOCATION_MODE_BATTERY_SAVING, Settings.Secure.LOCATION_MODE_OFF -> return false
-                else -> return false
+            return when (locationMode) {
+                Settings.Secure.LOCATION_MODE_HIGH_ACCURACY, Settings.Secure.LOCATION_MODE_SENSORS_ONLY -> true
+                Settings.Secure.LOCATION_MODE_BATTERY_SAVING, Settings.Secure.LOCATION_MODE_OFF -> false
+                else -> false
             }
         }
 

@@ -32,8 +32,10 @@ class DetailFragment : BaseFragment(), OnBackPressListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail, container, false)
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
@@ -46,10 +48,15 @@ class DetailFragment : BaseFragment(), OnBackPressListener {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         userComponent.inject(this)
-        viewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailArtistViewModel::class.java)
+        viewModel =
+                ViewModelProviders.of(this, viewModelFactory).get(DetailArtistViewModel::class.java)
 
-        if (arguments!!.getString(BUNDLE_ARTIST_NAME).isNotEmpty()) {
-            viewModel.setArtistName(arguments!!.getString(BUNDLE_ARTIST_NAME))
+        arguments?.let { args ->
+            args.getString(BUNDLE_ARTIST_NAME)?.let { name ->
+                if (name.isNotBlank()) {
+                    viewModel.setArtistName(name)
+                }
+            }
         }
 
         viewModel.getArtist().observe(this, Observer { detailModel ->

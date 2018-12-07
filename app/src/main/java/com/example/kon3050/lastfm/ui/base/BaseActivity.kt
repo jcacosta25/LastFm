@@ -19,8 +19,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (navigator.getNavigator().currentFragment != null && navigator.getNavigator().currentFragment is OnBackPressListener) {
-            (navigator.getNavigator().currentFragment as OnBackPressListener).onBackPressed()
+        if (navigator.getNavigator().getCurrentFragment() != null && navigator.getNavigator().getCurrentFragment() is OnBackPressListener) {
+            (navigator.getNavigator().getCurrentFragment() as OnBackPressListener).onBackPressed()
         } else {
             super.onBackPressed()
             navigator.getNavigator().popStack()
